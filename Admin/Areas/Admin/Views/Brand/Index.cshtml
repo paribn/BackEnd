@@ -1,0 +1,21 @@
+﻿@model BrandIndexVM
+
+@{
+    ViewData["Page"] = "Brand";
+}
+
+<div class="d-flex justify-content-start container">
+    <span></span>
+    <a asp-action="Add" class="btn btn-success">Add</a>
+</div>
+@foreach (var color in Model.Brands)
+{
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@color.Name</h5>
+            <a asp-action="Delete" asp-route-id="@color.Id" class="btn btn-danger">Delete</a>
+            <a asp-action="Update" asp-route-id="@color.Id" class="btn btn-warning">Update</a>
+        </div>
+    </div>
+
+}

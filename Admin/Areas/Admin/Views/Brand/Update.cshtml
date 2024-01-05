@@ -1,0 +1,14 @@
+﻿@model BrandUpdateVM
+@{
+    ViewData["Page"] = " Update Brand";
+}
+
+
+<form asp-action="Update" asp-controller="Brand" method="post">
+    <div class="form-group col-md-2">
+        <label for="1">Name</label>
+        <input asp-for="Name" class="form-control" id="1" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

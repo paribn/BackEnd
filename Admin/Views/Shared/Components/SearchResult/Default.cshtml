@@ -1,0 +1,8 @@
+﻿@model ShopSearchVM
+
+<ul class="list-group">
+    @foreach (var product in Model.Products)
+    {
+        <li class="list-group-item">@product.Name</li>
+    }
+</ul>

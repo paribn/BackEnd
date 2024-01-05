@@ -1,0 +1,25 @@
+﻿  @model HomeIndexVM
+   
+<!-- Product Catagories Area Start -->
+<div class="products-catagories-area clearfix">
+    <div class="amado-pro-catagory clearfix">
+       @foreach(var product in Model.Products)
+        {
+            <!-- Single Catagory -->
+            <div class="single-products-catagory clearfix">
+                <a asp-controller="Shop" asp-action="Index">
+                    <img src="~/productimg/@product.ProductImages.FirstOrDefault()?.ImageName" alt="">
+                    <!-- Hover Content -->
+                    <div class="hover-content">
+                        <div class="line"></div>
+                        <p>From $@product.Price</p>
+                        <h4>@product.Name</h4>
+                    </div>
+                </a>
+            </div>
+
+        }
+     
+    </div>
+</div>
+<!-- Product Catagories Area End -->

@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "";
+}
+
+@model AccountSingInVM
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="~/admin/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="~/admin/css/nucleo-svg.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="~/admin/css/nucleo-svg.css" rel="stylesheet" />
+    <link id="pagestyle" href="~/admin/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
+</head>
+
+<body class="">
+    <div class="container position-sticky z-index-sticky top-0">
+    </div>
+    <main class="main-content  mt-0">
+        <section>
+            <div class="page-header min-vh-75">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+                            <div class="card card-plain mt-8">
+                                <div class="card-header pb-0 text-left bg-transparent">
+                                    <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
+                                    <p class="mb-0">Enter your user name and password to sign in</p>
+                                </div>
+                                <div class="card-body">
+                                    <form asp-controller="Account" asp-action="SingIn" method="post">
+                                        <label>User name</label>
+                                        <div class="mb-3">
+                                            <input asp-for="UserName" class="form-control">
+                                            <span style="color:red" asp-validation-for="@Model.UserName"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <span toggle="#password-field" class="fa fa-fw field-icon toggle-password fa-eye-slash" style="position: absolute;
+                                             top: 60%;
+                                             right: 40px;"></span>
+                                            <input asp-for="Password" id="password" type="password" class="form-control" required="">
+                                            <span style="color:red" asp-validation-for="@Model.Password"></span>
+
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input asp-for="RememberMe" id="rememberMe" class="form-check-input" type="checkbox">
+                                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                                            <span style="color:red" asp-validation-for="@Model.RememberMe"></span>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                                            <span style="color:red" asp-validation-for="@Model.ErrorMessage"></span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
+                                <img src="~/admin/img/curved-images/curved6.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var eyeIcon = document.querySelector('.toggle-password');
+        var passwordInput = document.getElementById('password');
+
+        eyeIcon.addEventListener('click', function () {
+            var isPasswordVisible = passwordInput.type === 'text';
+
+            if (isPasswordVisible) {
+                passwordInput.type = 'password';
+                eyeIcon.classList.add('fa-eye-slash');
+                eyeIcon.classList.remove('fa-eye');
+            } else {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        });
+    });
+</script>
+
+@section ValidationScript{
+
+    <partial name="_ValidationScriptsPartial" />
+
+      }
+</html>

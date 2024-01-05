@@ -1,0 +1,24 @@
+﻿@model ColorIndexVM
+
+@{
+    ViewData["Page"] = "Color";
+}
+
+<div class="d-flex justify-content-start container">
+    <span></span>
+    <a asp-action="Add" class="btn btn-success">Add</a>
+
+</div>
+@foreach(var color in Model.colors)
+{
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@color.Name</h5>
+            <div style="width:20px; height:20px;border-radius:100%; background-color:@color.Code"></div>
+            <a asp-controller="Color" asp-action="Delete" asp-route-id="@color.Id" class="btn btn-danger">Delete</a>
+            <a asp-controller="Color" asp-action="Update" asp-route-id="@color.Id" class="btn btn-warning">Update</a>
+
+        </div>
+    </div>
+
+}

@@ -1,0 +1,79 @@
+﻿@model ProductIndexVM
+
+@{
+    ViewData["Page"] = "Product";
+}
+<section class="blog_section layout_padding">
+    <div class="d-flex justify-content-start container">
+        <span></span>
+        <a asp-action="Add" class="btn btn-success">Add</a>
+    </div>
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="box">
+                    <div class="img-box">
+                        <img src="~/productimg/@product.ProductImages.FirstOrDefault(m => m.IsMain)?.ImageName" style="height:200px; width:200px" />
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            @product.Name
+                        </h5>
+                        <p class="card-text">Price:$ @product.Price.ToString("##.00")</p>
+                        <p class="card-text">Category: @product.Category.Name</p>
+                        <p class="card-text">Description: @product.Description</p>
+                        <p class="card-text">Count: @product.Count </p>
+                        <p class="card-text">Color: @product.Color.Name</p>
+
+                        <div class="for-delete-update" style="display: flex ; justify-content: space-between; align-items: center;">
+
+                            @if (@User.IsInRole("Admin"))
+                            {
+                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">
+                                    Delete
+                                </a>
+                                <a asp-controller="Product" asp-action="Update" asp-route-id="@product.Id" class="btn btn-warning">
+                                    Update
+                                </a>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        @*  <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+        </a>
+        </li>
+
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+        <li class="page-item">
+        <a asp-action="Index" asp-route-page="@i" class="page-link @(i==currentPage ? "active" : "")">
+        @i
+        </a>
+        </li>
+        }
+
+        <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+        </a>
+        </li>
+        </ul>
+        </nav>*@
+
+
+
+    </div>
+    </div>
+</section>

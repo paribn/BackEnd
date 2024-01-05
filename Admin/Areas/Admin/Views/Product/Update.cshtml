@@ -1,0 +1,66 @@
+﻿@model ProductUpdateVM
+
+@{
+    ViewData["Page"] = "Update Product";
+}
+<div style="display: flex; gap: 30px;">
+    @foreach (var image in Model.ProductImages)
+    {
+        <div>
+            <img style="display: block" width="200px" height="200px" src="~/productimg/@Model.ProductImages.FirstOrDefault()?.ImageName" />
+            <button product-id="@image.Id" style="color: white; width: 200px;" type="submit" class="btn btn-danger">Delete</button>
+        </div>
+    }
+</div>
+<form method="post" class="row g-3" enctype="multipart/form-data">
+    <div class="col-md-12">
+        <label for="1" class="form-label"> Name</label>
+        <input asp-for="Name" class="form-control" id="1">
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div class="col-md-4">
+        <label for="2" class="form-label"> Price</label>
+        <input asp-for="Price" step="0.1" class="form-control" id="2">
+        <span class="text-danger" asp-validation-for="Price"></span>
+    </div>
+    <div class="col-md-4">
+        <label for="2" class="form-label">Count</label>
+        <input asp-for="Count" class="form-control" id="2">
+        <span class="text-danger" asp-validation-for="Count"></span>
+    </div>
+    <div class="col-md-12">
+        <label for="1" class="form-label">Description</label>
+        <input asp-for="Description" class="form-control" id="1">
+        <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+    <div class="col-md-12">
+        <label for="5" class="form-label">Photo</label>
+        <input asp-for="Photos" class="form-control img-input" id="5">
+        <span class="text-danger" asp-validation-for="Photos"></span>
+    </div>
+
+
+    <div class="col-md-4">
+        <label for="4" class="form-label">Category</label>
+        <select asp-for="ProductCategoryId" asp-items="@Model.Category">
+            <option>Please select one</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="4" class="form-label">Brand</label>
+        <select asp-for="ProductBrandId" asp-items="@Model.Brand">
+            <option>Please select one</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="4" class="form-label">Color</label>
+        <select asp-for="ProductColorId" asp-items="@Model.Color">
+            <option>Please select one</option>
+        </select>
+    </div>
+
+
+    <div class="col-12">
+        <button class="btn btn-primary">Update product</button>
+    </div>
+</form>
