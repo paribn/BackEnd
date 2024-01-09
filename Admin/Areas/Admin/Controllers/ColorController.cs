@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Admin.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
 
     public class ColorController : BaseController
     {

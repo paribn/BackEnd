@@ -19,7 +19,7 @@ namespace Admin.Controllers
 
             var products = await _dbContext.Products
                 .Include(x => x.ProductImages)
-                .Take(4)
+                .Take(1)
                 .AsNoTracking()
                 .ToListAsync();
 

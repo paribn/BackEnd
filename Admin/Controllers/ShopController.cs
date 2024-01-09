@@ -2,6 +2,7 @@
 using Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace Admin.Controllers
 {
@@ -14,27 +15,35 @@ namespace Admin.Controllers
             _appDbContext = appDbContext;
         }
 
-        public async Task<IActionResult> Index(int? categoryId, int? brandId, int colorId)
+        public async Task<IActionResult> Index(int? categoryId, int? brandId, int? colorId, int page)
         {
+            if (page <= 0) page = 1;
+
+            int pageSize = 4;
+
+            decimal productCount = _appDbContext.Products.Count();
+
+
             var categories = await _appDbContext.Categories.AsNoTracking().ToListAsync();
             var brands = await _appDbContext.Brands.AsNoTracking().ToListAsync();
             var colors = await _appDbContext.Colors.AsNoTracking().ToListAsync();
 
-            var products = await _appDbContext.Products
-                .Where(x => (categoryId == null ? true : x.CategoryId == categoryId)
-                    && (brandId == null ? true : x.BrandId == brandId))
-                //&& (colorId == null ? true : x.ColorId == colorId))
-                .Include(x => x.ProductImages)
-                .Take(6)
-                .AsNoTracking()
-                .ToListAsync();
+            var productsQuery = _appDbContext.Products
+             .Where(x => (categoryId == null ? true : x.CategoryId == categoryId)
+                 && (brandId == null ? true : x.BrandId == brandId)
+                 && (colorId == null ? true : x.ColorId == colorId))
+             .Include(x => x.ProductImages)
+             .OrderByDescending(x => x.Id);
+
+            var productNav = await productsQuery.ToPagedListAsync(page, pageSize);
 
             var model = new ShopIndexVM
             {
                 Categories = categories,
                 Brands = brands,
                 Colors = colors,
-                Products = products
+                Products = productNav,
+
             };
 
             return View(model);

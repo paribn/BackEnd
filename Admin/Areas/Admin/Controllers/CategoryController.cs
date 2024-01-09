@@ -2,11 +2,14 @@
 using Admin.Areas.Admin.Models.CategoryVM;
 using Admin.Entities;
 using Admin.General;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Admin.Areas.Admin.Controllers
 {
+    [Authorize]
+
     public class CategoryController : BaseController
     {
         private readonly AppDbContext _dbcontext;

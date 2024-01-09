@@ -18,3 +18,4 @@ searchInput.addEventListener('keyup', (e) => {
         .then(x => x.text())
         .then(x => searchResult.innerHTML = x)
 })
+

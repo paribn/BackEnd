@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Admin.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240102135221_tables_add")]
-    partial class tables_add
+    [Migration("20240108202009_Again_Create_All_Tables_im_so_angry")]
+    partial class Again_Create_All_Tables_im_so_angry
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,6 +115,55 @@ namespace Admin.Migrations
                     b.ToTable("Brands");
                 });
 
+            modelBuilder.Entity("Admin.Entities.CartCheckout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Adress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirsName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("cartCheckouts");
+                });
+
             modelBuilder.Entity("Admin.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -207,15 +256,17 @@ namespace Admin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId")
-                        .IsUnique();
+                    b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImage");
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -381,8 +432,8 @@ namespace Admin.Migrations
             modelBuilder.Entity("Admin.Entities.ProductImage", b =>
                 {
                     b.HasOne("Admin.Entities.Product", "Product")
-                        .WithOne("ProductImage")
-                        .HasForeignKey("Admin.Entities.ProductImage", "ProductId")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -457,7 +508,7 @@ namespace Admin.Migrations
 
             modelBuilder.Entity("Admin.Entities.Product", b =>
                 {
-                    b.Navigation("ProductImage");
+                    b.Navigation("ProductImages");
                 });
 #pragma warning restore 612, 618
         }

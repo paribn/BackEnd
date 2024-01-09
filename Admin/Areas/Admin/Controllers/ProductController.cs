@@ -4,6 +4,7 @@ using Admin.Entities;
 using Admin.General;
 using areas.Services;
 using EntityFrameworkProject.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Data;
 
 namespace Admin.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ProductController : BaseController
     {
 

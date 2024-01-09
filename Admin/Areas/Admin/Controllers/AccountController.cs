@@ -37,5 +37,20 @@ namespace Admin.Areas.Admin.Controllers
             return RedirectToAction(Constants.AdminRoutes.HomeIndexAction, Constants.AdminRoutes.HomeController);
 
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            if (!IsAuthenticated())
+                return RedirectToAction(nameof(Index), "Home");
+
+            await _singInManager.SignOutAsync();
+            return RedirectToAction(nameof(SingIn));
+        }
+
+        private bool IsAuthenticated()
+        {
+            return HttpContext.User.Identity.IsAuthenticated;
+        }
     }
+
 }

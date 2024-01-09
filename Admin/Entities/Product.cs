@@ -15,5 +15,6 @@
         public Color Color { get; set; }
         public Brand Brand { get; set; }
         public ICollection<ProductImage> ProductImages { get; set; }
+
     }
 }

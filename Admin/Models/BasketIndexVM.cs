@@ -2,7 +2,7 @@
 
 namespace Admin.Models
 {
-    public class BasketComponentVM
+    public class BasketIndexVM
     {
         public List<Product> Products { get; set; }
     }
