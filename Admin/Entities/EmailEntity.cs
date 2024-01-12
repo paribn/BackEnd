@@ -11,7 +11,7 @@ namespace Admin.Entities
 
         [Required]
         [EmailAddress]
-        public string? ToEmail { get; set; }
+        public string ToEmail { get; set; }
 
 
     }
