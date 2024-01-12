@@ -18,54 +18,54 @@
             </div>
         </div>
 
-        @foreach(var product in Model.products)
+        @foreach (var product in Model.products)
         {
-            
-        <div class="row">
-            <div class="col-12 col-lg-7">
-                 <div class="single_product_thumb">
-                       <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(@Url.Content("~/productimg/" + product.ProductImages.FirstOrDefault(p=>p.IsMain)?.ImageName));"></li>
 
-                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(@Url.Content("~/productimg/" + product.ProductImages.FirstOrDefault(p=>p.IsHover)?.ImageName));"></li>
+            <div class="row">
+                <div class="col-12 col-lg-7">
+                    <div class="single_product_thumb">
+                        <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(@Url.Content("~/productimg/" + product.ProductImages.FirstOrDefault(p=>p.IsMain)?.ImageName));"></li>
 
-                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image:url(@Url.Content("~/productimg/" + product.ProductImages.Skip(2).FirstOrDefault()?.ImageName));"></li>
+                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(@Url.Content("~/productimg/" + product.ProductImages.FirstOrDefault(p=>p.IsHover)?.ImageName));"></li>
 
-                                    <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(@Url.Content("~/productimg/" + product.ProductImages.Skip(3).FirstOrDefault()?.ImageName));"></li>
+                                <li data-target="#product_details_slider" data-slide-to="2" style="background-image:url(@Url.Content("~/productimg/" + product.ProductImages.Skip(2).FirstOrDefault()?.ImageName));"></li>
+
+                                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(@Url.Content("~/productimg/" + product.ProductImages.Skip(3).FirstOrDefault()?.ImageName));"></li>
 
 
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <a class="gallery_img" href="~/productimg/@product.ProductImages.FirstOrDefault(x=>x.IsMain)?.ImageName">
-                                        
-                                            <img class="d-block w-100" src="~/productimg/@product.ProductImages.FirstOrDefault(x=>x.IsMain)?.ImageName" alt="First slide">
-                                        </a>
-                                </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="~/productimg/@product.ProductImages.FirstOrDefault(x=> x.IsHover)?.ImageName">
-                                        <img class="d-block w-100" src="~/productimg/@product.ProductImages.FirstOrDefault(p=>p.IsHover)?.ImageName" alt="Second slide">
-                                        </a>
-                                    </div>
+                            </ol>
+                            <div class="carousel-inner">
                                 <div class="carousel-item">
-                                        <a class="gallery_img" href="~/productimg/@product.ProductImages.Skip(2).FirstOrDefault()?.ImageName">
-                                            <img class="d-block w-100" src="~/productimg/@product.ProductImages.Skip(2).FirstOrDefault()?.ImageName" alt="Third slide">
-                                        </a>
-                                    </div>
+                                    <a class="gallery_img" href="~/productimg/@product.ProductImages.FirstOrDefault(x=>x.IsMain)?.ImageName">
+
+                                        <img class="d-block w-100" src="~/productimg/@product.ProductImages.FirstOrDefault(x=>x.IsMain)?.ImageName" alt="First slide">
+                                    </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a class="gallery_img" href="~/productimg/@product.ProductImages.FirstOrDefault(x=> x.IsHover)?.ImageName">
+                                        <img class="d-block w-100" src="~/productimg/@product.ProductImages.FirstOrDefault(p=>p.IsHover)?.ImageName" alt="Second slide">
+                                    </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a class="gallery_img" href="~/productimg/@product.ProductImages.Skip(2).FirstOrDefault()?.ImageName">
+                                        <img class="d-block w-100" src="~/productimg/@product.ProductImages.Skip(2).FirstOrDefault()?.ImageName" alt="Third slide">
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                  </div>
+                    </div>
+                </div>
             </div>
             <div class="col-12 col-lg-5">
                 <div class="single_product_desc">
                     <!-- Product Meta Data -->
                     <div class="product-meta-data">
                         <div class="line"></div>
-                        <p class="product-price">$@Model.products.FirstOrDefault().Price</p>
+                        <p class="product-price">$@product.Price</p>
                         <a asp-controller="Product" asp-action="Index">
-                            <h6>@Model.products.FirstOrDefault().Name</h6>
+                            <h6>@product.Name</h6>
                         </a>
                         <!-- Ratings & Review -->
                         <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
@@ -88,7 +88,7 @@
 
                     <div class="short_overview my-5">
                         <p>
-                            @Model.products.FirstOrDefault().Description
+                            @product.Description
                         </p>
                     </div>
 
@@ -115,16 +115,15 @@
                                 </span>
                             </div>
                         </div>
-                        <a asp-controller="Cart" asp-action="AddTobasket" asp-route-id="@Model.products.FirstOrDefault().Id" type="submit"
-                                name="addtocart"
-                                value="5"
-                                class="btn amado-btn">
+                        <a asp-controller="Cart" asp-action="AddTobasket" asp-route-id="@product.Id" type="submit"
+                           name="addtocart"
+                           value="5"
+                           class="btn amado-btn">
                             Add to cart
                         </a>
                     </form>
                 </div>
             </div>
-
         }
     </div>
 </div>
