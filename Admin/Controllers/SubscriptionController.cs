@@ -10,7 +10,10 @@ namespace Admin.Controllers
         [HttpPost]
         public IActionResult SendEmail(EmailEntity objEMail)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var app = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json").Build();
 
@@ -30,6 +33,7 @@ namespace Admin.Controllers
             mailMessage.Body = mess;
             mailMessage.IsBodyHtml = true;
             SmtpClient smtpClient = new SmtpClient(Host);
+
 
             try
             {

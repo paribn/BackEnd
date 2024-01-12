@@ -8,6 +8,8 @@ namespace Admin.Entities
         [ValidateNever]
         public string FromEmailAdress { get; set; }
 
+
+        [Required]
         [EmailAddress]
         public string? ToEmail { get; set; }
 
